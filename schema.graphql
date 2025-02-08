@@ -1,4 +1,4 @@
-type PositionClosed @entity(immutable: true) {
+type UserPosition @entity(immutable: true) {
   id: Bytes!
   caller: Bytes! # address
   onBehalf: Bytes! # address
@@ -11,35 +11,11 @@ type PositionClosed @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type PositionCreated @entity(immutable: true) {
+type UserSupplyShare @entity(immutable: true) {
   id: Bytes!
   caller: Bytes! # address
-  onBehalf: Bytes! # address
-  collateralAmount: BigInt! # uint256
-  borrowAmount: BigInt! # uint256
+  supplyShare: BigInt! # uint256
   timestamp: BigInt! # uint256
-  isActive: Boolean! # bool
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Repaid @entity(immutable: true) {
-  id: Bytes!
-  caller: Bytes! # address
-  onBehalf: Bytes! # address
-  collateralAmount: BigInt! # uint256
-  borrowAmount: BigInt! # uint256
-  timestamp: BigInt! # uint256
-  isActive: Boolean! # bool
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Supply @entity(immutable: true) {
-  id: Bytes!
-  caller: Bytes! # address
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

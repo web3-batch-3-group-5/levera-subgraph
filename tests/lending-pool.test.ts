@@ -7,10 +7,10 @@ import {
   afterAll
 } from "matchstick-as"
 import { Address, BigInt } from "@graphprotocol/graph-ts"
-import { PositionClosed } from "../generated/schema"
-import { PositionClosed as PositionClosedEvent } from "../generated/LendingPool/LendingPool"
-import { handlePositionClosed } from "../src/lending-pool"
-import { createPositionClosedEvent } from "./lending-pool-utils"
+import { UserPosition } from "../generated/schema"
+import { UserPosition as UserPositionEvent } from "../generated/LendingPool/LendingPool"
+import { handleUserPosition } from "../src/lending-pool"
+import { createUserPositionEvent } from "./lending-pool-utils"
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0
@@ -26,8 +26,8 @@ describe("Describe entity assertions", () => {
     let collateralAmount = BigInt.fromI32(234)
     let borrowAmount = BigInt.fromI32(234)
     let timestamp = BigInt.fromI32(234)
-    let isActive = "boolean Not implemented"
-    let newPositionClosedEvent = createPositionClosedEvent(
+    let isActive = false
+    let newUserPositionEvent = createUserPositionEvent(
       caller,
       onBehalf,
       collateralAmount,
@@ -35,7 +35,7 @@ describe("Describe entity assertions", () => {
       timestamp,
       isActive
     )
-    handlePositionClosed(newPositionClosedEvent)
+    handleUserPosition(newUserPositionEvent)
   })
 
   afterAll(() => {
@@ -45,45 +45,45 @@ describe("Describe entity assertions", () => {
   // For more test scenarios, see:
   // https://thegraph.com/docs/en/developer/matchstick/#write-a-unit-test
 
-  test("PositionClosed created and stored", () => {
-    assert.entityCount("PositionClosed", 1)
+  test("UserPosition created and stored", () => {
+    assert.entityCount("UserPosition", 1)
 
     // 0xa16081f360e3847006db660bae1c6d1b2e17ec2a is the default address used in newMockEvent() function
     assert.fieldEquals(
-      "PositionClosed",
+      "UserPosition",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
       "caller",
       "0x0000000000000000000000000000000000000001"
     )
     assert.fieldEquals(
-      "PositionClosed",
+      "UserPosition",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
       "onBehalf",
       "0x0000000000000000000000000000000000000001"
     )
     assert.fieldEquals(
-      "PositionClosed",
+      "UserPosition",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
       "collateralAmount",
       "234"
     )
     assert.fieldEquals(
-      "PositionClosed",
+      "UserPosition",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
       "borrowAmount",
       "234"
     )
     assert.fieldEquals(
-      "PositionClosed",
+      "UserPosition",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
       "timestamp",
       "234"
     )
     assert.fieldEquals(
-      "PositionClosed",
+      "UserPosition",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
       "isActive",
-      "boolean Not implemented"
+      "false"
     )
 
     // More assert options:
