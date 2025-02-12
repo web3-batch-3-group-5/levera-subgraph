@@ -2,28 +2,77 @@ specVersion: 1.0.0
 indexerHints:
   prune: auto
 schema:
-  file: ./schema.graphql
+  file: ./subgraph.graphql
 dataSources:
-  - kind: ethereum
-    name: LendingPool
+  - name: LendingPoolFactory
+    kind: ethereum/contract
     network: arbitrum-sepolia
     source:
-      address: "0x6ffeB3D350a8a2548b330043Ed41f6a00355E8B7"
-      abi: LendingPool
-      startBlock: 122137978
+      address: "0x9B8918cABf1D4838d988F7d9D459c1ABE3Af3a6D"
+      abi: LendingPoolFactory
+      startBlock: 123142545
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
+        - AllLendingPool
+        - CreateLendingPool
+        - StoreLendingPool
+        - DiscardLendingPool
+      abis:
+        - name: LendingPoolFactory
+          file: ./abis/LendingPoolFactory.json
+      eventHandlers:
+        - event: AllLendingPool(indexed address,address,address,address,address,string,string,string,string,address,bool)
+          handler: handleAllLendingPool
+        - event: CreateLendingPool(indexed address,(address,address,address,address,string,string,string,string,address,bool))
+          handler: handleCreateLendingPool
+        - event: StoreLendingPool(indexed address,(address,address,address,address,string,string,string,string,address,bool))
+          handler: handleStoreLendingPool
+        - event: DiscardLendingPool(indexed address)
+          handler: handleDiscardLendingPool
+      file: ./src/lending-pool-factory.ts
+templates:
+  - name: LendingPool
+    kind: ethereum/contract
+    network: arbitrum-sepolia
+    source:
+      abi: LendingPool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/lending-pool.ts
+      entities:
         - UserPosition
         - UserSupplyShare
+        - Supply
+        - Withdraw
+        - AccrueInterest
+        - BorrowByPosition
+        - RepayByPosition
+        - SupplyCollateralByPosition
+        - WithdrawCollateralByPosition
       abis:
         - name: LendingPool
           file: ./abis/LendingPool.json
       eventHandlers:
-        - event: UserPosition(indexed address,indexed address,uint256,uint256,uint256,bool)
+        - event: UserPosition(indexed address,indexed address,indexed address,uint256,uint256,uint256,bool)
           handler: handleUserPosition
-        - event: UserSupplyShare(indexed address,uint256,uint256)
+        - event: UserSupplyShare(indexed address,indexed address,uint256)
           handler: handleUserSupplyShare
-      file: ./src/lending-pool.ts
+        - event: Supply(indexed address,indexed address,uint256)
+          handler: handleSupply
+        - event: Withdraw(indexed address,indexed address,uint256)
+          handler: handleWithdraw
+        - event: AccrueInterest(indexed address,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: BorrowByPosition(indexed address,indexed address,indexed address,(uint256,uint256,uint256,bool))
+          handler: handleBorrowByPosition
+        - event: RepayByPosition(indexed address,indexed address,indexed address,(uint256,uint256,uint256,bool))
+          handler: handleRepayByPosition
+        - event: SupplyCollateralByPosition(indexed address,indexed address,indexed address,(uint256,uint256,uint256,bool))
+          handler: handleSupplyCollateralByPosition
+        - event: WithdrawCollateralByPosition(indexed address,indexed address,indexed address,(uint256,uint256,uint256,bool))
+          handler: handleWithdrawCollateralByPosition

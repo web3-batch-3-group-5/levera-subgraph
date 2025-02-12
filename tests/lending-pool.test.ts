@@ -8,7 +8,6 @@ import {
 } from "matchstick-as"
 import { Address, BigInt } from "@graphprotocol/graph-ts"
 import { UserPosition } from "../generated/schema"
-import { UserPosition as UserPositionEvent } from "../generated/LendingPool/LendingPool"
 import { handleUserPosition } from "../src/lending-pool"
 import { createUserPositionEvent } from "./lending-pool-utils"
 
@@ -24,14 +23,14 @@ describe("Describe entity assertions", () => {
       "0x0000000000000000000000000000000000000001"
     )
     let collateralAmount = BigInt.fromI32(234)
-    let borrowAmount = BigInt.fromI32(234)
+    let borrowShares = BigInt.fromI32(234)
     let timestamp = BigInt.fromI32(234)
     let isActive = false
     let newUserPositionEvent = createUserPositionEvent(
       caller,
       onBehalf,
       collateralAmount,
-      borrowAmount,
+      borrowShares,
       timestamp,
       isActive
     )
@@ -70,7 +69,7 @@ describe("Describe entity assertions", () => {
     assert.fieldEquals(
       "UserPosition",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
-      "borrowAmount",
+      "borrowShares",
       "234"
     )
     assert.fieldEquals(

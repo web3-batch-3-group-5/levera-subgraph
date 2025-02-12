@@ -1,6 +1,6 @@
 import { newMockEvent } from "matchstick-as"
 import { ethereum, Address, BigInt } from "@graphprotocol/graph-ts"
-import { UserSupplyShare, UserPosition } from "../generated/LendingPool/LendingPool"
+import { UserSupplyShare, UserPosition } from "../generated/templates/LendingPool/LendingPool"
 
 export function createUserSupplyShareEvent(
   caller: Address,
@@ -34,7 +34,7 @@ export function createUserPositionEvent(
   caller: Address,
   onBehalf: Address,
   collateralAmount: BigInt,
-  borrowAmount: BigInt,
+  borrowShares: BigInt,
   timestamp: BigInt,
   isActive: boolean
 ): UserPosition {
@@ -56,8 +56,8 @@ export function createUserPositionEvent(
   )
   userPositionEvent.parameters.push(
     new ethereum.EventParam(
-      "borrowAmount",
-      ethereum.Value.fromUnsignedBigInt(borrowAmount)
+      "borrowShares",
+      ethereum.Value.fromUnsignedBigInt(borrowShares)
     )
   )
   userPositionEvent.parameters.push(

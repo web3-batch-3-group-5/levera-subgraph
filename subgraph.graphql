@@ -1,0 +1,177 @@
+interface Pool @entity {
+  id: Bytes!
+  loanToken: Bytes! # address
+  collateralToken: Bytes! # address
+  loanTokenUsdDataFeed: Bytes! # address
+  collateralTokenUsdDataFeed: Bytes! # address
+  loanTokenName: String!
+  collateralTokenName: String!
+  loanTokenSymbol: String!
+  collateralTokenSymbol: String!
+  creator: Bytes! # address
+  isActive: Boolean! # bool
+}
+
+type PoolParams implements Pool @entity(immutable: true) {
+  id: Bytes!
+  loanToken: Bytes! # address
+  collateralToken: Bytes! # address
+  loanTokenUsdDataFeed: Bytes! # address
+  collateralTokenUsdDataFeed: Bytes! # address
+  loanTokenName: String!
+  collateralTokenName: String!
+  loanTokenSymbol: String!
+  collateralTokenSymbol: String!
+  creator: Bytes! # address
+  isActive: Boolean! # bool
+}
+
+type AllLendingPool implements Pool @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes! # address
+  loanToken: Bytes! # address
+  collateralToken: Bytes! # address
+  loanTokenUsdDataFeed: Bytes! # address
+  collateralTokenUsdDataFeed: Bytes! # address
+  loanTokenName: String!
+  collateralTokenName: String!
+  loanTokenSymbol: String!
+  collateralTokenSymbol: String!
+  creator: Bytes! # address
+  isActive: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CreateLendingPool @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes!
+  poolParams: PoolParams!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type StoreLendingPool @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes!
+  poolParams: PoolParams!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DiscardLendingPool @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UserPosition @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes! # address
+  caller: Bytes! # address
+  onBehalf: Bytes! # address
+  collateralAmount: BigInt! # uint256
+  borrowShares: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  isActive: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UserSupplyShare @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes! # address
+  caller: Bytes! # address
+  supplyShare: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Supply @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes! # address
+  caller: Bytes! # address
+  supplyShare: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Withdraw @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes! # address
+  caller: Bytes! # address
+  supplyShare: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AccrueInterest @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes! # address
+  prevBorrowRate: BigInt! # uint256
+  interest: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Position @entity {
+  id: Bytes!
+  collateralAmount: BigInt! # uint256
+  borrowShares: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  isActive: Boolean! # bool
+}
+
+type BorrowByPosition @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes! # address
+  caller: Bytes! # address
+  onBehalf: Bytes! # address
+  position: Position!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RepayByPosition @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes! # address
+  caller: Bytes! # address
+  onBehalf: Bytes! # address
+  position: Position!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SupplyCollateralByPosition @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes! # address
+  caller: Bytes! # address
+  onBehalf: Bytes! # address
+  position: Position!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type WithdrawCollateralByPosition @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes! # address
+  caller: Bytes! # address
+  onBehalf: Bytes! # address
+  position: Position!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
