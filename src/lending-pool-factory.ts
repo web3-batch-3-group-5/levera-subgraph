@@ -12,14 +12,11 @@ import {
   DiscardLendingPool
 } from "../generated/schema"
 import { LendingPool as LendingPoolTemplate } from "../generated/templates";
-import { saveBlockDetail } from "./util";
 
 export function handleAllLendingPool(event: AllLendingPoolEvent): void {
   let entity = new AllLendingPool(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity = saveBlockDetail(entity, event)
-
   entity.lendingPool = event.params.lendingPool
   entity.loanToken = event.params.loanToken
   entity.collateralToken = event.params.collateralToken
@@ -31,6 +28,9 @@ export function handleAllLendingPool(event: AllLendingPoolEvent): void {
   entity.collateralTokenSymbol = event.params.collateralTokenSymbol
   entity.creator = event.params.creator
   entity.isActive = event.params.isActive
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
   entity.save()
 }
 
@@ -38,8 +38,6 @@ export function handleCreateLendingPool(event: CreateLendingPoolEvent): void {
   let entity = new CreateLendingPool(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity = saveBlockDetail(entity, event)
-
   entity.lendingPool = event.params.lendingPool
   // Encode the struct as bytes before storing it
   let encodedPoolParams = ethereum.encode(
@@ -53,8 +51,10 @@ export function handleCreateLendingPool(event: CreateLendingPoolEvent): void {
     entity.poolParams = Bytes.empty();
   }
 
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
   entity.save()
-
   LendingPoolTemplate.create(event.params.lendingPool)
 }
 
@@ -62,8 +62,6 @@ export function handleStoreLendingPool(event: StoreLendingPoolEvent): void {
   let entity = new StoreLendingPool(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity = saveBlockDetail(entity, event)
-
   entity.lendingPool = event.params.lendingPool
   // Encode the struct as bytes before storing it
   let encodedPoolParams = ethereum.encode(
@@ -77,6 +75,9 @@ export function handleStoreLendingPool(event: StoreLendingPoolEvent): void {
     entity.poolParams = Bytes.empty();
   }
 
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
   entity.save()
 }
 
@@ -84,8 +85,9 @@ export function handleDiscardLendingPool(event: DiscardLendingPoolEvent): void {
   let entity = new DiscardLendingPool(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity = saveBlockDetail(entity, event)
-
   entity.lendingPool = event.params.lendingPool
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
   entity.save()
 }
