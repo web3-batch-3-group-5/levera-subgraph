@@ -48,42 +48,6 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "loanTokenUsdDataFeed",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "collateralTokenUsdDataFeed",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "loanTokenName",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "collateralTokenName",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "loanTokenSymbol",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "collateralTokenSymbol",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
         "name": "creator",
         "type": "address"
       },
@@ -107,62 +71,28 @@
         "type": "address"
       },
       {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "loanToken",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "collateralToken",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "loanTokenUsdDataFeed",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "collateralTokenUsdDataFeed",
-            "type": "address"
-          },
-          {
-            "internalType": "string",
-            "name": "loanTokenName",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "collateralTokenName",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "loanTokenSymbol",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "collateralTokenSymbol",
-            "type": "string"
-          },
-          {
-            "internalType": "address",
-            "name": "creator",
-            "type": "address"
-          },
-          {
-            "internalType": "bool",
-            "name": "isActive",
-            "type": "bool"
-          }
-        ],
         "indexed": false,
-        "internalType": "struct PoolParams",
-        "name": "poolParams",
-        "type": "tuple"
+        "internalType": "address",
+        "name": "loanToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "collateralToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "creator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "isActive",
+        "type": "bool"
       }
     ],
     "name": "CreateLendingPool",
@@ -191,62 +121,28 @@
         "type": "address"
       },
       {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "loanToken",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "collateralToken",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "loanTokenUsdDataFeed",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "collateralTokenUsdDataFeed",
-            "type": "address"
-          },
-          {
-            "internalType": "string",
-            "name": "loanTokenName",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "collateralTokenName",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "loanTokenSymbol",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "collateralTokenSymbol",
-            "type": "string"
-          },
-          {
-            "internalType": "address",
-            "name": "creator",
-            "type": "address"
-          },
-          {
-            "internalType": "bool",
-            "name": "isActive",
-            "type": "bool"
-          }
-        ],
         "indexed": false,
-        "internalType": "struct PoolParams",
-        "name": "poolParams",
-        "type": "tuple"
+        "internalType": "address",
+        "name": "loanToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "collateralToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "creator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "isActive",
+        "type": "bool"
       }
     ],
     "name": "StoreLendingPool",
@@ -273,6 +169,21 @@
         "internalType": "address",
         "name": "collateralTokenUsdDataFeed",
         "type": "address"
+      },
+      {
+        "internalType": "uint8",
+        "name": "liquidationThresholdPercentage",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint8",
+        "name": "interestRate",
+        "type": "uint8"
+      },
+      {
+        "internalType": "enum PositionType",
+        "name": "positionType",
+        "type": "uint8"
       }
     ],
     "name": "createLendingPool",
@@ -386,53 +297,8 @@
     "name": "lendingPools",
     "outputs": [
       {
-        "internalType": "address",
-        "name": "loanToken",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "collateralToken",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "loanTokenUsdDataFeed",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "collateralTokenUsdDataFeed",
-        "type": "address"
-      },
-      {
-        "internalType": "string",
-        "name": "loanTokenName",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "collateralTokenName",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "loanTokenSymbol",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "collateralTokenSymbol",
-        "type": "string"
-      },
-      {
-        "internalType": "address",
-        "name": "creator",
-        "type": "address"
-      },
-      {
         "internalType": "bool",
-        "name": "isActive",
+        "name": "",
         "type": "bool"
       }
     ],

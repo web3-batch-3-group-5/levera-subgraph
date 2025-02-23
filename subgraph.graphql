@@ -47,7 +47,10 @@ type AllLendingPool implements Pool @entity(immutable: true) {
 type CreateLendingPool @entity(immutable: true) {
   id: Bytes!
   lendingPool: Bytes!
-  poolParams: PoolParams!
+  loanToken: Bytes!
+  collateralToken: Bytes!
+  creator: Bytes!
+  isActive: Boolean!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -56,7 +59,10 @@ type CreateLendingPool @entity(immutable: true) {
 type StoreLendingPool @entity(immutable: true) {
   id: Bytes!
   lendingPool: Bytes!
-  poolParams: PoolParams!
+  loanToken: Bytes!
+  collateralToken: Bytes!
+  creator: Bytes!
+  isActive: Boolean!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -65,20 +71,6 @@ type StoreLendingPool @entity(immutable: true) {
 type DiscardLendingPool @entity(immutable: true) {
   id: Bytes!
   lendingPool: Bytes!
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type UserPosition @entity(immutable: true) {
-  id: Bytes!
-  lendingPool: Bytes! # address
-  caller: Bytes! # address
-  onBehalf: Bytes! # address
-  collateralAmount: BigInt! # uint256
-  borrowShares: BigInt! # uint256
-  timestamp: BigInt! # uint256
-  isActive: Boolean! # bool
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -124,14 +116,6 @@ type AccrueInterest @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type Position @entity {
-  id: Bytes!
-  collateralAmount: BigInt! # uint256
-  borrowShares: BigInt! # uint256
-  timestamp: BigInt! # uint256
-  isActive: Boolean! # bool
-}
-
 type BorrowByPosition @entity(immutable: true) {
   id: Bytes!
   lendingPool: Bytes! # address
@@ -171,6 +155,102 @@ type WithdrawCollateralByPosition @entity(immutable: true) {
   caller: Bytes! # address
   onBehalf: Bytes! # address
   position: Position!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PositionCreated @entity {
+  id: ID!
+  positionAddress: Bytes!
+  lendingPool: Bytes!
+  baseCollateral: BigInt!
+  leverage: Int!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Borrow @entity {
+  id: ID! # This is a string
+  lendingPool: Bytes!
+  caller: Bytes!
+  onBehalf: Bytes!
+  baseCollateral: BigInt!
+  effectiveCollateral: BigInt!
+  borrowShares: BigInt!
+  leverage: Int!
+  liquidationPrice: Int!
+  health: Int!
+  ltv: Int!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SupplyCollateral @entity {
+  id: ID! # This is a string
+  lendingPool: Bytes!
+  caller: Bytes!
+  onBehalf: Bytes!
+  baseCollateral: BigInt!
+  effectiveCollateral: BigInt!
+  borrowShares: BigInt!
+  leverage: Int!
+  liquidationPrice: Int!
+  health: Int!
+  ltv: Int!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UserPosition @entity {
+  id: ID! # This is a string
+  lendingPool: Bytes!
+  caller: Bytes!
+  onBehalf: Bytes!
+  baseCollateral: BigInt!
+  effectiveCollateral: BigInt!
+  borrowShares: BigInt!
+  leverage: Int!
+  liquidationPrice: BigInt!
+  health: BigInt!
+  ltv: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type WithdrawCollateral @entity {
+  id: ID! # This is a string
+  lendingPool: Bytes!
+  caller: Bytes!
+  onBehalf: Bytes!
+  baseCollateral: BigInt!
+  effectiveCollateral: BigInt!
+  borrowShares: BigInt!
+  leverage: Int!
+  liquidationPrice: Int!
+  health: Int!
+  ltv: Int!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Position @entity {
+  id: ID! # This is a string
+  lendingPool: Bytes!
+  caller: Bytes!
+  onBehalf: Bytes!
+  baseCollateral: BigInt!
+  effectiveCollateral: BigInt!
+  borrowShares: BigInt!
+  leverage: Int!
+  liquidationPrice: BigInt!
+  health: BigInt!
+  ltv: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

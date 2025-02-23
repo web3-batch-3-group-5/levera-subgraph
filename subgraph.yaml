@@ -24,15 +24,36 @@ dataSources:
         - name: LendingPoolFactory
           file: ./abis/LendingPoolFactory.json
       eventHandlers:
-        - event: AllLendingPool(indexed address,address,address,address,address,string,string,string,string,address,bool)
+        - event: AllLendingPool(indexed address,address,address,address,bool)
           handler: handleAllLendingPool
-        - event: CreateLendingPool(indexed address,(address,address,address,address,string,string,string,string,address,bool))
+        - event: CreateLendingPool(indexed address,address,address,address,bool)
           handler: handleCreateLendingPool
-        - event: StoreLendingPool(indexed address,(address,address,address,address,string,string,string,string,address,bool))
+        - event: StoreLendingPool(indexed address,address,address,address,bool)
           handler: handleStoreLendingPool
         - event: DiscardLendingPool(indexed address)
           handler: handleDiscardLendingPool
       file: ./src/lending-pool-factory.ts
+  - name: PositionFactory
+    kind: ethereum/contract
+    network: arbitrum-sepolia
+    source:
+      address: "0x9B8918cABf1D4838d988F7d9D459c1ABE3Af3a6D"
+      abi: PositionFactory
+      startBlock: 123142545
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - PositionCreated
+      abis:
+        - name: PositionFactory
+          file: ./abis/PositionFactory.json
+      eventHandlers:
+        - event: PositionCreated(address,address,uint256,uint8)
+          handler: handlePositionCreated
+      file: ./src/position-factory.ts
+
 templates:
   - name: LendingPool
     kind: ethereum/contract
@@ -45,21 +66,14 @@ templates:
       language: wasm/assemblyscript
       file: ./src/lending-pool.ts
       entities:
-        - UserPosition
         - UserSupplyShare
         - Supply
         - Withdraw
         - AccrueInterest
-        - BorrowByPosition
-        - RepayByPosition
-        - SupplyCollateralByPosition
-        - WithdrawCollateralByPosition
       abis:
         - name: LendingPool
           file: ./abis/LendingPool.json
       eventHandlers:
-        - event: UserPosition(indexed address,indexed address,indexed address,uint256,uint256,uint256,bool)
-          handler: handleUserPosition
         - event: UserSupplyShare(indexed address,indexed address,uint256)
           handler: handleUserSupplyShare
         - event: Supply(indexed address,indexed address,uint256)
@@ -68,11 +82,27 @@ templates:
           handler: handleWithdraw
         - event: AccrueInterest(indexed address,uint256,uint256)
           handler: handleAccrueInterest
-        - event: BorrowByPosition(indexed address,indexed address,indexed address,(uint256,uint256,uint256,bool))
-          handler: handleBorrowByPosition
-        - event: RepayByPosition(indexed address,indexed address,indexed address,(uint256,uint256,uint256,bool))
-          handler: handleRepayByPosition
-        - event: SupplyCollateralByPosition(indexed address,indexed address,indexed address,(uint256,uint256,uint256,bool))
-          handler: handleSupplyCollateralByPosition
-        - event: WithdrawCollateralByPosition(indexed address,indexed address,indexed address,(uint256,uint256,uint256,bool))
-          handler: handleWithdrawCollateralByPosition
+  - name: Position
+    kind: ethereum/contract
+    network: arbitrum-sepolia
+    source:
+      abi: Position
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/position.ts
+      entities:
+        - Position
+      abis:
+        - name: Position
+          file: ./abis/Position.json
+      eventHandlers:
+        - event: Borrow(indexed address,indexed address,address,uint256,uint256,uint256,uint8,uint8,uint8,uint8)
+          handler: handleBorrow
+        - event: SupplyCollateral(indexed address,indexed address,address,uint256,uint256,uint256,uint8,uint8,uint8,uint8)
+          handler: handleSupplyCollateral
+        - event: UserPosition(indexed address,indexed address,address,uint256,uint256,uint256,uint8,uint256,uint256,uint256)
+          handler: handleUserPosition
+        - event:  WithdrawCollateral(indexed address,indexed address,address,uint256,uint256,uint256,uint8,uint8,uint8,uint8)
+          handler: handleWithdrawCollateral

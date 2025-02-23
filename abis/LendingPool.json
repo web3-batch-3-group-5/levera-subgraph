@@ -20,10 +20,35 @@
         "internalType": "contract AggregatorV2V3Interface",
         "name": "_collateralTokenUsdPriceFeed",
         "type": "address"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_ltp",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_interestRate",
+        "type": "uint8"
+      },
+      {
+        "internalType": "enum PositionType",
+        "name": "_positionType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "address",
+        "name": "_creator",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "FlashLoanFailed",
+    "type": "error"
   },
   {
     "inputs": [],
@@ -106,112 +131,6 @@
         "type": "address"
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "onBehalf",
-        "type": "address"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "collateralAmount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "borrowShares",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "timestamp",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "isActive",
-            "type": "bool"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct Position",
-        "name": "position",
-        "type": "tuple"
-      }
-    ],
-    "name": "BorrowByPosition",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "lendingPool",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "caller",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "onBehalf",
-        "type": "address"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "collateralAmount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "borrowShares",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "timestamp",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "isActive",
-            "type": "bool"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct Position",
-        "name": "position",
-        "type": "tuple"
-      }
-    ],
-    "name": "RepayByPosition",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "lendingPool",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "caller",
-        "type": "address"
-      },
-      {
         "indexed": false,
         "internalType": "uint256",
         "name": "supplyShare",
@@ -219,108 +138,6 @@
       }
     ],
     "name": "Supply",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "lendingPool",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "caller",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "onBehalf",
-        "type": "address"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "collateralAmount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "borrowShares",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "timestamp",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "isActive",
-            "type": "bool"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct Position",
-        "name": "position",
-        "type": "tuple"
-      }
-    ],
-    "name": "SupplyCollateralByPosition",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "lendingPool",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "caller",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "onBehalf",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "collateralAmount",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "borrowShares",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bool",
-        "name": "isActive",
-        "type": "bool"
-      }
-    ],
-    "name": "UserPosition",
     "type": "event"
   },
   {
@@ -374,57 +191,17 @@
     "type": "event"
   },
   {
-    "anonymous": false,
-    "inputs": [
+    "inputs": [],
+    "name": "_getContractId",
+    "outputs": [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "lendingPool",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "caller",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "onBehalf",
-        "type": "address"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "collateralAmount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "borrowShares",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "timestamp",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "isActive",
-            "type": "bool"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct Position",
-        "name": "position",
-        "type": "tuple"
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
       }
     ],
-    "name": "WithdrawCollateralByPosition",
-    "type": "event"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [],
@@ -447,33 +224,13 @@
       }
     ],
     "name": "borrowByPosition",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "borrowRate",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "shares",
         "type": "uint256"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "onBehalf",
-        "type": "address"
-      }
-    ],
-    "name": "closePosition",
-    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -518,7 +275,7 @@
   },
   {
     "inputs": [],
-    "name": "createPosition",
+    "name": "creator",
     "outputs": [
       {
         "internalType": "address",
@@ -526,62 +283,125 @@
         "type": "address"
       }
     ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "name": "flashLoan",
+    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_loanToken",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "effectiveCollateralPrice",
+        "type": "uint256"
       },
       {
-        "internalType": "address",
-        "name": "_collateralToken",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "borrowAmount",
+        "type": "uint256"
       }
     ],
-    "name": "getContractId",
+    "name": "getHealth",
     "outputs": [
       {
-        "internalType": "bytes32",
+        "internalType": "uint8",
         "name": "",
-        "type": "bytes32"
+        "type": "uint8"
       }
     ],
-    "stateMutability": "pure",
+    "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "onBehalf",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "effectiveCollateralPrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "borrowAmount",
+        "type": "uint256"
       }
     ],
-    "name": "getPosition",
+    "name": "getLTV",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "effectiveCollateral",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "borrowAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "getLiquidationPrice",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getUtilizationRate",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "collateralAmount",
+        "name": "",
         "type": "uint256"
-      },
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "interestRate",
+    "outputs": [
       {
-        "internalType": "uint256",
-        "name": "borrowShares",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "isActive",
-        "type": "bool"
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -615,12 +435,12 @@
   },
   {
     "inputs": [],
-    "name": "ltv",
+    "name": "ltp",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "uint8",
         "name": "",
-        "type": "uint256"
+        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -640,6 +460,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "positionType",
+    "outputs": [
+      {
+        "internalType": "enum PositionType",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -648,12 +481,18 @@
       },
       {
         "internalType": "uint256",
-        "name": "shares",
+        "name": "amount",
         "type": "uint256"
       }
     ],
     "name": "repayByPosition",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "shares",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -716,6 +555,19 @@
   },
   {
     "inputs": [],
+    "name": "totalCollateral",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "totalSupplyAssets",
     "outputs": [
       {
@@ -756,23 +608,8 @@
     "name": "userPositions",
     "outputs": [
       {
-        "internalType": "uint256",
-        "name": "collateralAmount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "borrowShares",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
-      },
-      {
         "internalType": "bool",
-        "name": "isActive",
+        "name": "",
         "type": "bool"
       }
     ],
