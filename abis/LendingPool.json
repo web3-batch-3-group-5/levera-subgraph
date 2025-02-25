@@ -22,14 +22,19 @@
         "type": "address"
       },
       {
-        "internalType": "uint8",
-        "name": "_ltp",
-        "type": "uint8"
+        "internalType": "address",
+        "name": "_router",
+        "type": "address"
       },
       {
-        "internalType": "uint8",
+        "internalType": "uint256",
+        "name": "_ltp",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
         "name": "_interestRate",
-        "type": "uint8"
+        "type": "uint256"
       },
       {
         "internalType": "enum PositionType",
@@ -325,9 +330,9 @@
     "name": "getHealth",
     "outputs": [
       {
-        "internalType": "uint8",
+        "internalType": "uint256",
         "name": "",
-        "type": "uint8"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -349,12 +354,12 @@
     "name": "getLTV",
     "outputs": [
       {
-        "internalType": "uint8",
+        "internalType": "uint256",
         "name": "",
-        "type": "uint8"
+        "type": "uint256"
       }
     ],
-    "stateMutability": "view",
+    "stateMutability": "pure",
     "type": "function"
   },
   {
@@ -373,9 +378,9 @@
     "name": "getLiquidationPrice",
     "outputs": [
       {
-        "internalType": "uint8",
+        "internalType": "uint256",
         "name": "",
-        "type": "uint8"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -399,9 +404,9 @@
     "name": "interestRate",
     "outputs": [
       {
-        "internalType": "uint8",
+        "internalType": "uint256",
         "name": "",
-        "type": "uint8"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -438,9 +443,9 @@
     "name": "ltp",
     "outputs": [
       {
-        "internalType": "uint8",
+        "internalType": "uint256",
         "name": "",
-        "type": "uint8"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -478,22 +483,42 @@
         "internalType": "address",
         "name": "onBehalf",
         "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
       }
     ],
-    "name": "repayByPosition",
-    "outputs": [
+    "name": "registerPosition",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "onBehalf",
+        "type": "address"
+      },
       {
         "internalType": "uint256",
         "name": "shares",
         "type": "uint256"
       }
     ],
+    "name": "repayByPosition",
+    "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "router",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -596,9 +621,17 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "",
+        "name": "onBehalf",
         "type": "address"
-      },
+      }
+    ],
+    "name": "unregisterPosition",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       {
         "internalType": "address",
         "name": "",

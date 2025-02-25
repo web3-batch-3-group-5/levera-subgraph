@@ -1,6 +1,12 @@
 [
   {
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_router",
+        "type": "address"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
@@ -171,14 +177,14 @@
         "type": "address"
       },
       {
-        "internalType": "uint8",
+        "internalType": "uint256",
         "name": "liquidationThresholdPercentage",
-        "type": "uint8"
+        "type": "uint256"
       },
       {
-        "internalType": "uint8",
+        "internalType": "uint256",
         "name": "interestRate",
-        "type": "uint8"
+        "type": "uint256"
       },
       {
         "internalType": "enum PositionType",
@@ -308,6 +314,19 @@
   {
     "inputs": [],
     "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "router",
     "outputs": [
       {
         "internalType": "address",

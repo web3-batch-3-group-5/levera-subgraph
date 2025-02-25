@@ -1,8 +1,12 @@
 {
   "arbitrum-sepolia": {
     "LendingPoolFactory": {
-      "address": "0x9B8918cABf1D4838d988F7d9D459c1ABE3Af3a6D",
-      "startBlock": 123142545
+      "address": "0x4e0524Bd8cE75de87f15B08CFc13B3cBF7B388Bf",
+      "startBlock": 127156897
+    },
+    "PositionFactory": {
+      "address": "0x7BF71912432C89F154F6A5C6B029D6ea046ecC91",
+      "startBlock": 127156904
     }
   }
 }
