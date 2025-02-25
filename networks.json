@@ -1,8 +1,8 @@
 {
   "arbitrum-sepolia": {
     "LendingPoolFactory": {
-      "address": "0x4e0524Bd8cE75de87f15B08CFc13B3cBF7B388Bf",
-      "startBlock": 127156897
+      "address": "0xAb559D5A18e3D8764B24A49bE65cB762F12bb3F2",
+      "startBlock": 127203937
     },
     "PositionFactory": {
       "address": "0x7BF71912432C89F154F6A5C6B029D6ea046ecC91",
@@ -11,8 +11,8 @@
   },
   "flame-dawn-1": {
     "LendingPoolFactory": {
-      "address": "0xCCbC0b5c67924468782219F854e7D6b56717E8AE",
-      "startBlock": 4835103
+      "address": "0x17A55ead5D71f7ADBE24d90F3901F87E9601EB1A",
+      "startBlock": 4838218
     },
     "PositionFactory": {
       "address": "0x991de844C6A42AC2D4Bb6B97cE4fCf28296b8B84",

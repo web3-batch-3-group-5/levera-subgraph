@@ -6,14 +6,16 @@ schema:
 dataSources:
   - name: LendingPoolFactory
     kind: ethereum/contract
-    # network: arbitrum-sepolia
-    network: flame-dawn-1
+    network: arbitrum-sepolia
+    # network: flame-dawn-1
     source:
       abi: LendingPoolFactory
-      # address: "0x4e0524Bd8cE75de87f15B08CFc13B3cBF7B388Bf"
-      # startBlock: 127156897
-      address: "0xCCbC0b5c67924468782219F854e7D6b56717E8AE"
-      startBlock: 4835103
+      # arbitrum sepolia
+      address: "0xAb559D5A18e3D8764B24A49bE65cB762F12bb3F2"
+      startBlock: 127203937
+      # flame dawn-1
+      # address: "0x17A55ead5D71f7ADBE24d90F3901F87E9601EB1A"
+      # startBlock: 4838218
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -38,14 +40,16 @@ dataSources:
       file: ./src/lending-pool-factory.ts
   - name: PositionFactory
     kind: ethereum/contract
-    # network: arbitrum-sepolia
-    network: flame-dawn-1
+    network: arbitrum-sepolia
+    # network: flame-dawn-1
     source:
       abi: PositionFactory
-      # address: "0x7BF71912432C89F154F6A5C6B029D6ea046ecC91"
-      # startBlock: 127156904
-      address: "0x991de844C6A42AC2D4Bb6B97cE4fCf28296b8B84"
-      startBlock: 4835103
+      # arbitrum sepolia
+      address: "0x7BF71912432C89F154F6A5C6B029D6ea046ecC91"
+      startBlock: 127156904
+      # flame dawn-1
+      # address: "0x991de844C6A42AC2D4Bb6B97cE4fCf28296b8B84"
+      # startBlock: 4835103
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -65,8 +69,8 @@ dataSources:
 templates:
   - name: LendingPool
     kind: ethereum/contract
-    # network: arbitrum-sepolia
-    network: flame-dawn-1
+    network: arbitrum-sepolia
+    # network: flame-dawn-1
     source:
       abi: LendingPool
     mapping:
@@ -79,6 +83,7 @@ templates:
         - Supply
         - Withdraw
         - AccrueInterest
+        - LendingPoolStats
       abis:
         - name: LendingPool
           file: ./abis/LendingPool.json
@@ -91,10 +96,12 @@ templates:
           handler: handleWithdraw
         - event: AccrueInterest(indexed address,uint256,uint256)
           handler: handleAccrueInterest
+        - event: LendingPoolStats(indexed address,address,address,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleLendingPoolStats
   - name: Position
     kind: ethereum/contract
-    # network: arbitrum-sepolia
-    network: flame-dawn-1
+    network: arbitrum-sepolia
+    # network: flame-dawn-1
     source:
       abi: Position
     mapping:

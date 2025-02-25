@@ -4,13 +4,34 @@ import {
   Supply as SupplyEvent,
   Withdraw as WithdrawEvent,
   AccrueInterest as AccrueInterestEvent,
+  LendingPoolStats as LendingPoolStatsEvent,
 } from "../generated/templates/LendingPool/LendingPool"
 import {
   UserSupplyShare,
   Supply,
   Withdraw,
   AccrueInterest,
+  LendingPoolStats
 } from "../generated/schema"
+
+export function handleLendingPoolStats(event: LendingPoolStatsEvent): void {
+  let entity = new LendingPoolStats(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.lendingPool = event.params.lendingPool
+  entity.loanToken = event.params.loanToken
+  entity.collateralToken = event.params.collateralToken
+  entity.totalSupplyAssets = event.params.totalSupplyAssets
+  entity.totalSupplyShares = event.params.totalSupplyShares
+  entity.totalBorrowAssets = event.params.totalBorrowAssets
+  entity.totalBorrowShares = event.params.totalBorrowShares
+  entity.totalCollateral = event.params.totalCollateral
+  entity.utilizationRate = event.params.utilizationRate
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
+  entity.save()
+}
 
 export function handleUserSupplyShare(event: UserSupplyShareEvent): void {
   let entity = new UserSupplyShare(

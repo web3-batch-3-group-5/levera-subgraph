@@ -42,6 +42,22 @@ type DiscardLendingPool @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+type LendingPoolStats @entity(immutable: true) {
+  id: Bytes!
+  lendingPool: Bytes!
+  loanToken: Bytes!
+  collateralToken: Bytes!
+  totalSupplyAssets: BigInt!
+  totalSupplyShares: BigInt!
+  totalBorrowAssets: BigInt!
+  totalBorrowShares: BigInt!
+  totalCollateral: BigInt!
+  utilizationRate: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type UserSupplyShare @entity(immutable: true) {
   id: Bytes!
   lendingPool: Bytes! # address
