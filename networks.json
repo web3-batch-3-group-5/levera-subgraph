@@ -8,5 +8,15 @@
       "address": "0x7BF71912432C89F154F6A5C6B029D6ea046ecC91",
       "startBlock": 127156904
     }
+  },
+  "flame-dawn-1": {
+    "LendingPoolFactory": {
+      "address": "0xCCbC0b5c67924468782219F854e7D6b56717E8AE",
+      "startBlock": 4835103
+    },
+    "PositionFactory": {
+      "address": "0x991de844C6A42AC2D4Bb6B97cE4fCf28296b8B84",
+      "startBlock": 4835103
+    }
   }
 }
