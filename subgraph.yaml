@@ -117,7 +117,7 @@ templates:
         - WithdrawCollateral
       abis:
         - name: Position
-          file: ./abis/Position.json
+          file: ./abis/position.json
       eventHandlers:
         - event: UserPosition(indexed address,indexed address,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleUserPosition
